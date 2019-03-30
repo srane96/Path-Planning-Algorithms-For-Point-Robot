@@ -172,8 +172,6 @@ class Graph:
         while not curr_node == goal_node and not len(self.costs) == 0:
             # loop through each neighbour
             # mark current node as visited
-            self.nodes[curr_node].visited = True
-            bg[curr_node[1],curr_node[0]] = green
             for n in self.nodes[curr_node].neighbours:
                 # if neighbour is visted skip
                 if self.nodes[n].visited:
@@ -191,6 +189,8 @@ class Graph:
                 if total_cost < self.costs[n]:
                     self.costs[n] = total_cost
                     self.nodes[n].prev_node = curr_node
+            self.nodes[curr_node].visited = True
+            bg[curr_node[1],curr_node[0]] = green
             # delete cost of current node
             del self.costs[curr_node]
             # get smallest univisited node with smallest cost
