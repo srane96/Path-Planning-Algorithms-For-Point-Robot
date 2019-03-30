@@ -164,7 +164,7 @@ class Graph:
         # set current node equal to start node
         curr_node = start_node
         # loop until goal node is reached
-        while not curr_node == goal_node:
+        while not curr_node == goal_node and not len(self.costs) == 0:
             # loop through each neighbour
             for n in self.nodes[curr_node].neighbours:
                 # if neighbour is visted skip
@@ -186,6 +186,9 @@ class Graph:
             del self.costs[curr_node]
             # get smallest univisited node with smallest cost
             curr_node = self.get_smallest(self.costs)
+        if not curr_node == goal_node:
+            print("Sorry, goal point cannot be reached.")
+            return
         # Track the path from goal node to start node and mask nodes on the path
         while not self.nodes[curr_node].prev_node == None:
             self.nodes[curr_node].on_path = True

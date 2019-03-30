@@ -161,7 +161,7 @@ class Graph:
         # set current node equal to start node
         curr_node = start_node
         # loop until goal node is reached
-        while not curr_node == goal_node:
+        while not curr_node == goal_node and not len(self.costs) == 0:
             # loop through each neighbour
             # mark current node as visited
             self.nodes[curr_node].visited = True
@@ -188,6 +188,9 @@ class Graph:
             curr_node = self.get_smallest(self.costs,rob_x,rob_y)
             #cv2.imshow("A Star",bg)
             #cv2.waitKey(1)
+        if not curr_node == goal_node:
+            print("Sorry, goal point cannot be reached.")
+            return
         # Track the path from goal node to start node and mask nodes on the path
         print("G cost to reach the goal: ",self.nodes[curr_node].g_cost)
         while not self.nodes[curr_node].prev_node == None:

@@ -1,17 +1,7 @@
-
-# coding: utf-8
-
-# In[67]:
-
-
 import cv2
 import numpy as np
 import math
 import time
-
-
-# In[68]:
-
 
 ## List of methods to be used
 def is_in_rect(x,y,p1,p4):
@@ -111,11 +101,6 @@ def minkowski_sum(bg,r,obstacle_set,width,height):
                     
     return new_obstacle_set
     # using each point find new obstacle points
-    # don't forget to delete the old one
-
-
-# In[69]:
-
 
 class Node:
     def __init__(self):
@@ -187,7 +172,7 @@ class Graph:
         # set current node equal to start node
         curr_node = start_node
         # loop until goal node is reached
-        while not curr_node == goal_node:
+        while not curr_node == goal_node and not len(self.costs) == 0:
             # loop through each neighbour
             for n in self.nodes[curr_node].neighbours:
                 # if neighbour is visted skip
@@ -214,16 +199,15 @@ class Graph:
             cv2.imshow("Scaled Dijkstra Image",bg)
             cv2.waitKey(1)
         cv2.destroyAllWindows()
+        if not curr_node == goal_node:
+            print("Sorry, goal point cannot be reached.")
+            return
         # Track the path from goal node to start node and mask nodes on the path
         while not self.nodes[curr_node].prev_node == None:
             self.nodes[curr_node].on_path = True
             bg[curr_node[1],curr_node[0]] = blue
             curr_node = self.nodes[curr_node].prev_node
         cv2.destroyAllWindows()
-
-
-# In[70]:
-
 
 # scale the window size
 scale = 1
