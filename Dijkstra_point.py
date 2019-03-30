@@ -216,7 +216,7 @@ for x in range(0,width):
         if is_in_rect(x,y,[50*scale,38*scale],[100*scale,83*scale]) or is_in_circle(x,y,190*scale,20*scale,15*scale) or is_in_ellipse(x,y,30*scale,12*scale,140*scale,30*scale) or is_poly(x,y,scale):
             obstacle_set.add((x,y))
             bg[y,x] = (0,0,0)  
-cv2.imwrite("without_minowski.png",bg)
+cv2.imwrite("without_minkowski.png",bg)
 
 
 # Take user input for start node
